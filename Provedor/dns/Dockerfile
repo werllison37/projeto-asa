@@ -1,8 +1,8 @@
 FROM ubuntu:latest 
 
-RUN apt update -y 
+RUN apt-get update -y 
 
-RUN apt install bind9 dnsutils -y
+RUN apt-get install bind9 dnsutils -y
 
 COPY named.conf.local /etc/bind
 COPY db.barreta.com.br /etc/bind
