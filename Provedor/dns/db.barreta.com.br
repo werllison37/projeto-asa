@@ -1,15 +1,15 @@
 $TTL    604800
-@       IN      SOA     ns.asa.br. root.asa.br. (
+@       IN      SOA     ns.barreta.com.br. root.barreta.com.br. (
                         2         ; Serial
                         604800    ; Refresh
                         86400     ; Retry
                         2419200   ; Expire
                         604800 )  ; Negative Cache TTL
 
-;
-@       IN      NS      ns.
+; Registros de DNS
+@       IN      NS      ns.barreta.com.br.
+@       IN      MX      10 mail.barreta.com.br.
 @       IN      A       192.168.0.191
+mail    IN      A       192.168.0.191
 www     IN      A       192.168.0.191
-portal  IN      CNAME   www
-werllison   IN  CNAME   www
-izzy    IN      CNAME   www
+portal  IN      CNAME   www.barreta.com.br.

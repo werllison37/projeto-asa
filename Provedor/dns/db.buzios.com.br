@@ -1,0 +1,14 @@
+$TTL    604800
+@       IN      SOA     ns.buzios.com.br. root.buzios.com.br. (
+                        2         ; Serial
+                        604800    ; Refresh
+                        86400     ; Retry
+                        2419200   ; Expire
+                        604800 )  ; Negative Cache TTL
+
+; Registros de DNS
+@       IN      NS      ns.buzios.com.br.
+@       IN      MX      10 mail.buzios.com.br.
+@       IN      A       192.168.0.192
+mail    IN      A       192.168.0.192
+www     IN      A       192.168.0.192

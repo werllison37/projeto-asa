@@ -1,7 +1,17 @@
-zone "asa.br"{
+zone "barreta.com.br" {
     type master;
-    file "/etc/bind/db.asa.br";
-    allow-transfer {
-        127.0.0.1;
-    };
+    file "/etc/bind/db.barreta.com.br";
+    allow-transfer { 127.0.0.1; };
+};
+
+zone "buzios.com.br" {
+    type master;
+    file "/etc/bind/db.buzios.com.br";
+    allow-transfer { 127.0.0.1; };
+};
+
+zone "pirangi.com.br" {
+    type master;
+    file "/etc/bind/db.pirangi.com.br";
+    allow-transfer { 127.0.0.1; };
 };
