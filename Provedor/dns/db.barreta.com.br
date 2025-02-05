@@ -8,6 +8,7 @@ $TTL    604800
 
 ; Registros de DNS
 @       IN      NS      ns.barreta.com.br.
+ns      IN      A       192.168.0.191
 @       IN      MX      10 mail.barreta.com.br.
 @       IN      A       192.168.0.191
 mail    IN      A       192.168.0.191
