@@ -38,17 +38,24 @@ services:
      - "143:143/tcp" # IMAP
     volumes:
      - ./ssl:/etc/dovecot/ssl
+     - ./email/dovecot/conf:/etc/dovecot
+     - ./email/dovecot/mail:/var/mail
     networks:
      - asa-network
 
   webmail:
     image: roundcube/roundcubemail
-    container_name: roundcube_webmail
+    container_name: webmail
     environment:
       ROUNDCUBEMAIL_DEFAULT_HOST: tls://192.168.0.191
       ROUNDCUBEMAIL_SMTP_SERVER: tls://192.168.0.191
       ROUNDCUBEMAIL_SMTP_PORT: 587
       ROUNDCUBEMAIL_IMAP_PORT: 143
+      ROUNDCUBEMAIL_SMTP_AUTH_TYPE: LOGIN
+      ROUNDCUBEMAIL_IMAP_AUTH_TYPE: LOGIN
+      ROUNDCUBEMAIL_DEFAULT_PORT: 143
+      ROUNDCUBEMAIL_SMTP_CONN_OPTIONS: "ssl_verify_peer: false; ssl_allow_self_signed: true"
+      ROUNDCUBEMAIL_IMAP_CONN_OPTIONS: "ssl_verify_peer: false; ssl_allow_self_signed: true"
     ports:
       - "8080:80"  # Porta temporária para acessar o webmail diretamente no início
     networks:
