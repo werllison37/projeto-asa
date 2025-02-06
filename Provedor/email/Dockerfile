@@ -12,4 +12,6 @@ COPY main.cf /etc/postfix
 
 COPY ./dovecot/10-auth.conf /etc/dovecot/conf.d
 
+COPY ./dovecot/10-ssl.conf /etc/dovecot/conf.d/
+
 CMD ["sh", "-c", "service syslog-ng start ; service postfix start ; service dovecot start; tail -F /var/log/mail.log"]
