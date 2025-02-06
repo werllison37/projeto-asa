@@ -9,6 +9,7 @@ $TTL    604800
 ; Registros de DNS
 @       IN      NS      ns.pirangi.com.br.
 @       IN      MX      10 mail.pirangi.com.br.
-@       IN      A       192.168.0.193
-mail    IN      A       192.168.0.193
-www     IN      A       192.168.0.193
+@       IN      A       192.168.0.191
+ns      IN      A       192.168.0.191
+mail    IN      A       192.168.0.191
+www     IN      A       192.168.0.191

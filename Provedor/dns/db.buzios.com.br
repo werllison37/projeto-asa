@@ -9,6 +9,7 @@ $TTL    604800
 ; Registros de DNS
 @       IN      NS      ns.buzios.com.br.
 @       IN      MX      10 mail.buzios.com.br.
-@       IN      A       192.168.0.192
-mail    IN      A       192.168.0.192
-www     IN      A       192.168.0.192
+@       IN      A       192.168.0.191
+ns      IN      A       192.168.0.191
+mail    IN      A       192.168.0.191
+www     IN      A       192.168.0.191

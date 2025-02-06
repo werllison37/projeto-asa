@@ -8,17 +8,23 @@ services:
       - "53:53/udp"
       - "53:53/tcp"
     volumes:
-      - ./dns:/etc/bind
+      - ./dns/named.conf.local:/etc/bind/named.conf.local
 
- # proxy:
- #   build: 
- #     context: ./proxy
- #     dockerfile: Dockerfile
- #   container_name: proxy
- #   ports:
- #     - "80:80/tcp"
- #   networks:
- #      - asa-network
+  proxy:
+    build: 
+      context: ./proxy
+      dockerfile: Dockerfile
+    container_name: proxy
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./proxy/nginx.conf:/etc/nginx/nginx.conf
+      - ./proxy/ssl:/etc/nginx/ssl
+#    depends_on:
+#      - barreta
+    networks:
+       - asa-network
 
  #  servidor1:
  #    build: 
