@@ -1,14 +1,19 @@
 FROM ubuntu:latest
 
-RUN apt-get update --fix-missing -y
+ENV DEBIAN_FRONTEND=noninteractive 
 
-RUN apt-get upgrade -y
-
-RUN apt-get install postfix -y
-
-RUN apt install dovecot-imapd dovecot-pop3d -y
+RUN apt-get update --fix-missing -y && \
+    apt-get upgrade -y && \
+    apt-get install -y \
+    postfix \
+    dovecot-imapd \
+    dovecot-pop3d \
+    rsyslog && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
 
 COPY main.cf /etc/postfix
+
+COPY ./dovecot/dovecot.conf /etc/dovecot/dovecot.conf
 
 COPY ./dovecot/10-auth.conf /etc/dovecot/conf.d
 

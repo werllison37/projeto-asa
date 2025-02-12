@@ -9,6 +9,8 @@ services:
       - "53:53/tcp"
     volumes:
       - ./dns/named.conf.local:/etc/bind/named.conf.local
+    networks:
+      - asa-network
 
   proxy:
     build: 
@@ -21,8 +23,8 @@ services:
     volumes:
       - ./proxy/nginx.conf:/etc/nginx/nginx.conf
       - ./ssl:/etc/nginx/ssl
-#    depends_on:
-#      - barreta
+    depends_on:
+      - webmail
     networks:
        - asa-network
 
@@ -38,8 +40,8 @@ services:
      - "143:143/tcp" # IMAP
     volumes:
      - ./ssl:/etc/dovecot/ssl
-     - ./email/dovecot/conf:/etc/dovecot
-     - ./email/dovecot/mail:/var/mail
+     - ./email/dovecot:/etc/dovecot/conf.d
+#     - ./email/dovecot/mail:/var/mail
     networks:
      - asa-network
 
@@ -47,8 +49,8 @@ services:
     image: roundcube/roundcubemail
     container_name: webmail
     environment:
-      ROUNDCUBEMAIL_DEFAULT_HOST: tls://192.168.0.191
-      ROUNDCUBEMAIL_SMTP_SERVER: tls://192.168.0.191
+      ROUNDCUBEMAIL_DEFAULT_HOST: tls://email
+      ROUNDCUBEMAIL_SMTP_SERVER: tls://email
       ROUNDCUBEMAIL_SMTP_PORT: 587
       ROUNDCUBEMAIL_IMAP_PORT: 143
       ROUNDCUBEMAIL_SMTP_AUTH_TYPE: LOGIN
@@ -56,8 +58,6 @@ services:
       ROUNDCUBEMAIL_DEFAULT_PORT: 143
       ROUNDCUBEMAIL_SMTP_CONN_OPTIONS: "ssl_verify_peer: false; ssl_allow_self_signed: true"
       ROUNDCUBEMAIL_IMAP_CONN_OPTIONS: "ssl_verify_peer: false; ssl_allow_self_signed: true"
-    ports:
-      - "8080:80"  # Porta temporária para acessar o webmail diretamente no início
     networks:
       - asa-network
     depends_on:

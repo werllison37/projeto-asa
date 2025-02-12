@@ -7,7 +7,7 @@
 
 # myorigin = /etc/mailname
 
-myorigin = barreta.com.br
+myorigin = $myhostname
 
 # smtpd_banner = $myhostname ESMTP $mail_name (Ubuntu)
 smtpd_banner = barreta ESMTP barreta.com.br
