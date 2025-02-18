@@ -1,0 +1,44 @@
+services:
+  db_pirangi:
+    image: mariadb:latest
+    container_name: db_pirangi
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wpuser
+      MYSQL_PASSWORD: wppass
+    volumes:
+      - ./mysql/data:/var/lib/mysql
+    networks:
+      - provedor_asa-network
+
+  web_pirangi:
+    image: wordpress:latest
+    container_name: web_pirangi
+    restart: always
+    environment:
+      WORDPRESS_DB_HOST: db_pirangi
+      WORDPRESS_DB_USER: wpuser
+      WORDPRESS_DB_PASSWORD: wppass
+      WORDPRESS_DB_NAME: wordpress
+    volumes:
+      - ./wordpress:/var/www/html
+    networks:
+      - provedor_asa-network
+
+  nginx_pirangi:
+    image: nginx:latest
+    container_name: nginx_pirangi
+    restart: always
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - ./wordpress:/var/www/html
+    depends_on:
+      - web_pirangi
+    networks:
+      - provedor_asa-network
+
+networks:
+  provedor_asa-network:
+    external: true
