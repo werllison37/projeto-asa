@@ -27,17 +27,22 @@ services:
     networks:
       - provedor_asa-network
 
-  nginx_pirangi:
-    image: nginx:latest
-    container_name: nginx_pirangi
+  web_pirangi2:
+    image: wordpress:latest
+    container_name: web_pirangi2
     restart: always
+    environment:
+      WORDPRESS_DB_HOST: db_pirangi
+      WORDPRESS_DB_USER: wpuser
+      WORDPRESS_DB_PASSWORD: wppass
+      WORDPRESS_DB_NAME: wordpress
     volumes:
-      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
       - ./wordpress:/var/www/html
-    depends_on:
-      - web_pirangi
     networks:
       - provedor_asa-network
+
+volumes:
+  wordpress_data:
 
 networks:
   provedor_asa-network:
