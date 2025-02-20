@@ -41,6 +41,17 @@ services:
     networks:
       - provedor_asa-network
 
+  ssh:
+    build:
+      context: ./ssh
+      dockerfile: Dockerfile
+    container_name: ssh_cliente1
+    restart: always
+    ports:
+      - "2222:22"
+    networks:
+      - provedor_asa-network
+
 volumes:
   wordpress_data:
 
