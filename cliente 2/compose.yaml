@@ -1,5 +1,5 @@
 services:
-  db_pirangi:
+  db_buzios:
     image: mariadb:latest
     container_name: db_buzios
     restart: always
@@ -13,7 +13,7 @@ services:
     networks:
       - provedor_asa-network
 
-  web_pirangi:
+  web_buzios:
     image: wordpress:latest
     container_name: web_buzios
     restart: always
@@ -27,7 +27,7 @@ services:
     networks:
       - provedor_asa-network
 
-  web_pirangi2:
+  web_buzios2:
     image: wordpress:latest
     container_name: web_buzios2
     restart: always
