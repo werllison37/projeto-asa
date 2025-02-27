@@ -1,0 +1,60 @@
+services:
+  db_pirangi:
+    image: mariadb:latest
+    container_name: db_buzios
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wpuser
+      MYSQL_PASSWORD: wppass
+    volumes:
+      - ./mysql/data:/var/lib/mysql
+    networks:
+      - provedor_asa-network
+
+  web_pirangi:
+    image: wordpress:latest
+    container_name: web_buzios
+    restart: always
+    environment:
+      WORDPRESS_DB_HOST: db_buzios
+      WORDPRESS_DB_USER: wpuser
+      WORDPRESS_DB_PASSWORD: wppass
+      WORDPRESS_DB_NAME: wordpress
+    volumes:
+      - ./wordpress:/var/www/html
+    networks:
+      - provedor_asa-network
+
+  web_pirangi2:
+    image: wordpress:latest
+    container_name: web_buzios2
+    restart: always
+    environment:
+      WORDPRESS_DB_HOST: db_buzios
+      WORDPRESS_DB_USER: wpuser
+      WORDPRESS_DB_PASSWORD: wppass
+      WORDPRESS_DB_NAME: wordpress
+    volumes:
+      - ./wordpress:/var/www/html
+    networks:
+      - provedor_asa-network
+
+  ssh:
+    build:
+      context: ./ssh
+      dockerfile: Dockerfile
+    container_name: ssh_cliente2
+    restart: always
+    ports:
+      - "2223:22"
+    networks:
+      - provedor_asa-network
+
+volumes:
+  wordpress_data:
+
+networks:
+  provedor_asa-network:
+    external: true
